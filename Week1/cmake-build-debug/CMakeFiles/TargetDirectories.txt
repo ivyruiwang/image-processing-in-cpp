@@ -1,0 +1,3 @@
+/Users/rr/AMIP/Week1/cmake-build-debug/CMakeFiles/Week1.dir
+/Users/rr/AMIP/Week1/cmake-build-debug/CMakeFiles/edit_cache.dir
+/Users/rr/AMIP/Week1/cmake-build-debug/CMakeFiles/rebuild_cache.dir
