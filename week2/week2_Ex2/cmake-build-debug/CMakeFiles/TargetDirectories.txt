@@ -1,0 +1,3 @@
+/Users/rr/AMIP/AssignmentGit/week2-1103/week2_Ex2/cmake-build-debug/CMakeFiles/week2_Ex2.dir
+/Users/rr/AMIP/AssignmentGit/week2-1103/week2_Ex2/cmake-build-debug/CMakeFiles/edit_cache.dir
+/Users/rr/AMIP/AssignmentGit/week2-1103/week2_Ex2/cmake-build-debug/CMakeFiles/rebuild_cache.dir
