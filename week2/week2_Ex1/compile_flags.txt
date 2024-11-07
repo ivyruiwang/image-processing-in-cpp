@@ -1,0 +1,9 @@
+-IN:\7__PRG\codelite\mingw64\lib\gcc\x86_64-w64-mingw32\7.1.0\include\c++
+-IN:\7__PRG\codelite\mingw64\lib\gcc\x86_64-w64-mingw32\7.1.0\include\c++\x86_64-w64-mingw32
+-IN:\7__PRG\codelite\mingw64\lib\gcc\x86_64-w64-mingw32\7.1.0\include\c++\backward
+-IN:\7__PRG\codelite\mingw64\lib\gcc\x86_64-w64-mingw32\7.1.0\include
+-IN:\7__PRG\codelite\mingw64\lib\gcc\x86_64-w64-mingw32\7.1.0\include-fixed
+-IN:\7__PRG\codelite\mingw64\x86_64-w64-mingw32\include
+-IC:\Users\maqsood.yaqub\Desktop\cppworkspace\week2_workspace\vector_week2
+-target
+x86_64-pc-windows-gnu
