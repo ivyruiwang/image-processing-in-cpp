@@ -7,7 +7,7 @@
 int main() {
 
     // read a 3D image
-    aip::imageNd<float> myNdimageA ( "../amipractical_data/brainT1.nii.gz" );
+    aip::imageNd<float> myNdimageA ( "../data/brainT1.nii.gz" );
     
     
     size_t xl = myNdimageA.getsize(0);  
@@ -39,12 +39,12 @@ int main() {
     // make a sphere of radius 50 around voxel 91,128,128
     // by setting the intensities on its surface to 255
     // save as another image
-    myNdimageA.saveNII( "../amipractical_data/football.nii.gz" );
+    myNdimageA.saveNII( "../data/football.nii.gz" );
 
     // get X slice 91  and write as BMP
-    myNdimageA.getSlice( 0, 91,  "../amipractical_data/xslice.bmp" );
-    myNdimageA.getSlice( 1, 128,  "../amipractical_data/yslice.bmp" );
-    myNdimageA.getSlice( 2, 128,  "../amipractical_data/zslice.bmp" );
+    myNdimageA.getSlice( 0, 91,  "../data/xslice.bmp" );
+    myNdimageA.getSlice( 1, 128,  "../data/yslice.bmp" );
+    myNdimageA.getSlice( 2, 128,  "../data/zslice.bmp" );
     // 4 A get Y slice 128 and write as BMP
     // 4 B get Z slice 128 and write as BMP
     return ( 0 );
