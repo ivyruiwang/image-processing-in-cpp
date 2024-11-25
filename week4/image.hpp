@@ -16,7 +16,7 @@
 #include "bmpmini.hpp"
 #include "niftiio.hpp"
 
-/** \brief NO/DO read data enumeration for easily readable code
+/** \brief NO/DO read amipractical_data enumeration for easily readable code
  */
 enum readdata {
     NO_READ_DATA,
@@ -159,10 +159,10 @@ class imageNd {
 
     /** \brief use value_type for pixels
      *
-     * data:    vector with the pixel data
+     * amipractical_data:    vector with the pixel amipractical_data
      * sizes:   vector with the dimensions
      * strides: vector with the strides through
-     *          the data in each dimension
+     *          the amipractical_data in each dimension
      * header:  pointer to a NIfTI header
      *          for reading / writing files
      *
@@ -229,7 +229,7 @@ class imageNd {
 
     /** \brief (deep) copy constructor
      *
-     * copies data, sizes and header from en existing imageNd
+     * copies amipractical_data, sizes and header from en existing imageNd
      */
     imageNd ( const imageNd& rhs ) {
 
@@ -248,7 +248,7 @@ class imageNd {
 
     /** \brief assignment operator
      *
-     * assigns data, sizes and header of the
+     * assigns amipractical_data, sizes and header of the
      * right-hand side (RHS) image to (*this)
      */
     const imageNd<T>& operator= ( imageNd <T>& rhs ) {
@@ -283,7 +283,7 @@ class imageNd {
      *
      * This constructor reads an n-dimensional image
      * ( for NIfTI 1 <= n <= 7 ) from a NIfTI file and
-     * assigns its data, sizes and header to (*this).
+     * assigns its amipractical_data, sizes and header to (*this).
      */
     imageNd ( std::string filename ) {
 
@@ -309,9 +309,9 @@ class imageNd {
 
     }
 
-    /** \brief change the data type for writing a NIfTI file
+    /** \brief change the amipractical_data type for writing a NIfTI file
      *
-     * The data type is changed to e.g. float for
+     * The amipractical_data type is changed to e.g. float for
      * more flexibility (at the cost of file size).
      */
     void setNIIdatatype ( unsigned dtype ) {
@@ -322,8 +322,8 @@ class imageNd {
     /** \brief write to a NIfTI image
      *
      * Writes the contents of (*this) to a NIfTI
-     * file using the data and header information.
-     * The data type is changed to float for more
+     * file using the amipractical_data and header information.
+     * The amipractical_data type is changed to float for more
      * flexibility (at the cost of file size).
      *
      * NIfTI routines are run on a temporary copy
@@ -342,7 +342,7 @@ class imageNd {
      * for an existing image In, this operator can
      * be used with multidimensional co-ordinates to
      * indicate position, so In({x,y,z}) instead of
-     * In.data[x + y*sizes[1] + z*sizes[1]*sizes[2]].
+     * In.amipractical_data[x + y*sizes[1] + z*sizes[1]*sizes[2]].
      *
      * This operator is for reading only.
      */
@@ -356,7 +356,7 @@ class imageNd {
 
     /** \brief operator() for positional addressing
      *
-     * This operator is for modifying the data.
+     * This operator is for modifying the amipractical_data.
      */
     value_type& operator() ( std::initializer_list < size_t > const& indices ) {
         size_t const offset =
@@ -371,7 +371,7 @@ class imageNd {
      * for an existing image In, this operator can
      * be used with multidimensional co-ordinates to
      * indicate position, so In[{x,y,z}] instead of
-     * In.data[x + y*sizes[1] + z*sizes[1]*sizes[2]].
+     * In.amipractical_data[x + y*sizes[1] + z*sizes[1]*sizes[2]].
      *
      * This operator is for reading only.
      */
@@ -385,7 +385,7 @@ class imageNd {
 
     /** \brief operator[] for positional addressing
      *
-     * This operator is for modifying the data.
+     * This operator is for modifying the amipractical_data.
      */
     value_type& operator[] ( std::initializer_list < size_t > const& indices ) {
         size_t const offset =
@@ -398,7 +398,7 @@ class imageNd {
     /** brief compute indices at offset
      *
      * inverse of positional addressing - given a position
-     * in the 1D data vector, what are its multidimensional
+     * in the 1D amipractical_data vector, what are its multidimensional
      * indices?
      */
     const std::vector <size_t> indices_at_offset ( size_t pos1d ) {
@@ -574,7 +574,7 @@ class imageNd {
 
     /** \brief getdatasize() - returns the number of intensities
      *
-     * the size of the vector 'data'
+     * the size of the vector 'amipractical_data'
      */
     size_t              getdatasize ( ) {
         return std::accumulate( sizes.begin(), sizes.end(), 1, std::multiplies<size_t>() );
@@ -582,7 +582,7 @@ class imageNd {
 
 
 
-    /** \brief getdata_ptr() - returns the address of the data vector
+    /** \brief getdata_ptr() - returns the address of the amipractical_data vector
      *
      * this is a pointer to a vector -- use with care
      */
@@ -592,7 +592,7 @@ class imageNd {
 
 
 
-    /** \brief getdata_array() - returns the address of the data vector
+    /** \brief getdata_array() - returns the address of the amipractical_data vector
      *
      * this is a pointer to a vector -- use with care
      */
@@ -642,7 +642,7 @@ class imageNd {
         // set up the distribution
         std::normal_distribution <double> normaldist ( mu, sigma );
 
-        // add noise to the data
+        // add noise to the amipractical_data
         // N (mu, sigma) all with <double> values
         // (non-float leads to unexpected behaviour)
         for ( size_t i = 0; i < data.size(); i++ )
@@ -667,7 +667,7 @@ class imageNd {
         // set up the distribution
         std::normal_distribution <double> normaldist ( mu, sigma );
 
-        // add Rician noise to the data using 2 normally distributed noise values
+        // add Rician noise to the amipractical_data using 2 normally distributed noise values
         for ( size_t i = 0; i < data.size(); i++ ) {
 
             double n1 = data[i] + normaldist ( engine );
@@ -782,7 +782,7 @@ class imageNd {
             size_t slicex = (dim>0) ? 0 : 1;
             size_t slicey = (dim>1) ? 1 : 2;
 
-            // set sizes for sizes, strides and data start with 3D
+            // set sizes for sizes, strides and amipractical_data start with 3D
             out.sizes     = {    sizes[slicex], sizes[slicey], 1                                             };
             out.strides   = { 1, sizes[slicex], sizes[slicex] * sizes[slicey], sizes[slicex] * sizes[slicey] };
             out.data.resize (    *out.strides.rbegin()                                                       );
@@ -915,7 +915,7 @@ class imageNd {
      *
      * Ranges are given as xmin, xmax, ymin, ymax, zmin, zmax
      * Input and output are both of type imageNd, and this
-     * routine works exclusively with 3D data
+     * routine works exclusively with 3D amipractical_data
      */
     const imageNd <value_type> getsubvolume (size_t startx, size_t endx,
             size_t starty, size_t endy,
@@ -960,7 +960,7 @@ class imageNd {
      *
      * Ranges are given as xmin, ymin, zmin for where to insert
      * Source and destination are both of type imageNd, and this
-     * routine works exclusively with 3D data
+     * routine works exclusively with 3D amipractical_data
      */
     void setsubvolume ( imageNd <value_type>& in,
                         size_t startx,
@@ -1030,7 +1030,7 @@ class imageNd {
     /** brief compute if two neighbours are valid
      *
      * inverse of positional addressing - given a position
-     * in the 1D data vector, what are its multidimensional
+     * in the 1D amipractical_data vector, what are its multidimensional
      * indices?
      */
     inline bool valid_neighbours ( long offset1, long offset2, long delta = 1 ) {
@@ -1078,7 +1078,7 @@ class imageNd {
      *
      * Ranges are given as xmin, ymin, zmin for where to insert
      * Source and destination are both of type imageNd, and this
-     * routine works exclusively with 3D data
+     * routine works exclusively with 3D amipractical_data
      */
     int GetNNeigbours(int ip, int* NeighbourIndices, int ndim, size_t* dimensions) {
         if(ndim<=0 || ndim>3) {
@@ -1300,30 +1300,30 @@ class imageNd {
 			
 			case 4:
 				assert ( sizes.size() >= 2 );
-				nvec = { -strides[1], -1, 1, strides[1] };
+				nvec = { static_cast<long long>(-strides[1]), -1, 1, static_cast<long long>(strides[1]) };
 				break;
 			case 8:
 				assert ( sizes.size() >= 2 );
-				nvec = { -strides[1] - 1, -strides[1], -strides[1] + 1, 
+				nvec = { static_cast<long long>(-strides[1] - 1), static_cast<long long>(-strides[1]), static_cast<long long>(-strides[1] + 1),
 									 - 1,							 1,
-						  strides[1] - 1,  strides[1],  strides[1] + 1
+                         static_cast<long long>(strides[1] - 1),  static_cast<long long>(strides[1]),  static_cast<long long>(strides[1] + 1)
 					   };
 				break;
 			case 6:
 				assert ( sizes.size() >= 3 );
-				nvec = { -strides[2], -strides[1], -1, 1, strides[1], strides[2] };
+				nvec = { static_cast<long long>(-strides[2]), static_cast<long long>(-strides[1]), -1, 1, static_cast<long long>(strides[1]), static_cast<long long>(strides[2]) };
 				break;
 			case 26:
 				assert ( sizes.size() >= 3 );
-				nvec = { -strides[2] - strides[1] - 1, -strides[2] - strides[1], -strides[2]  -strides[1] + 1,
-						 -strides[2] - 1,              -strides[2],							  -strides[2] + 1, 
-						 -strides[2] + strides[1] - 1, -strides[2] + strides[1], -strides[2] + strides[1] + 1, 
-									 - strides[1] - 1,				-strides[1],			  -strides[1] + 1, 
-												   -1,														1, 
-									   strides[1] - 1,				 strides[1], 			   strides[1] + 1, 
-						  strides[2] - strides[1] - 1,  strides[2] - strides[1],  strides[2] - strides[1] + 1, 
-						  strides[2] - 1, 				strides[2],				  strides[2]			  + 1, 
-						  strides[2] + strides[1] - 1,	strides[2] + strides[1],  strides[2] + strides[1] + 1
+				nvec = { static_cast<long long>(-strides[2] - strides[1] - 1), static_cast<long long>(-strides[2] - strides[1]), static_cast<long long>(-strides[2]  -strides[1] + 1),
+                         static_cast<long long>(-strides[2] - 1),              static_cast<long long>(-strides[2]),							  static_cast<long long>(-strides[2] + 1),
+                         static_cast<long long>(-strides[2] + strides[1] - 1), static_cast<long long>(-strides[2] + strides[1]), static_cast<long long>(-strides[2] + strides[1] + 1),
+                         static_cast<long long>(- strides[1] - 1),				static_cast<long long>(-strides[1]),			  static_cast<long long>(-strides[1] + 1),
+												   -1,														1,
+                         static_cast<long long>(strides[1] - 1),				 static_cast<long long>(strides[1]), 			   static_cast<long long>(strides[1] + 1),
+                         static_cast<long long>(strides[2] - strides[1] - 1),  static_cast<long long>(strides[2] - strides[1]),  static_cast<long long>(strides[2] - strides[1] + 1),
+                         static_cast<long long>(strides[2] - 1), 				static_cast<long long>(strides[2]),				  static_cast<long long>(strides[2]			  + 1),
+                         static_cast<long long>(strides[2] + strides[1] - 1),	static_cast<long long>(strides[2] + strides[1]),  static_cast<long long>(strides[2] + strides[1] + 1)
 					   };
 				break;
 				
@@ -1377,7 +1377,7 @@ class imageNd {
 			cdata ( data.size(), 0 );
 
 		if ( ( std::is_same<value_type, float>::value ) || ( std::is_same<value_type, float>::value ) )
-			// proper quantisation for floating point data types -- otherwise too many checks needed
+			// proper quantisation for floating point amipractical_data types -- otherwise too many checks needed
 			std::transform ( data.begin(), data.end(), quant.begin(),
 								[&mn, &mx, &levels] ( auto input ) { return ( input - mn ) * levels / ( mx - mn ); } );
 		else
@@ -1394,14 +1394,14 @@ class imageNd {
 
 		////////////////////////////////////////////////////////////////////////////////
 		//
-		// sort sorted intensities in the data vector "sorted"
+		// sort sorted intensities in the amipractical_data vector "sorted"
 		// and also keep an array "indices" to see where they were in the image
 		//
 
 		std::vector<size_t> indices ( data.size() );
 
 		std::iota ( indices.begin(), indices.end(), 0 );      // fill with 0, 1, 2, ..
-		std::stable_sort ( indices.begin(), indices.end(),    // 'data' sorted for determining 'indices'
+		std::stable_sort ( indices.begin(), indices.end(),    // 'amipractical_data' sorted for determining 'indices'
 						   [&] ( size_t i, size_t j ) { return ( quant[i] < quant[j] ); } );
 
 		// the parent vector
@@ -1589,8 +1589,8 @@ class imageNd {
 	 */
 	const std::vector<size_t> getpoints ( size_t comp_start, size_t comp_end = 0, 
 										  bool sorted = false, std::vector<level_t> *mylevels = nullptr ) {
-		
-		std::vector<size_t> 
+
+        std::vector<size_t>
 			mypoints;
 		auto 
 			chigh = ( ! comp_end ) ? components.size() : comp_end;

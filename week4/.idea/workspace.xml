@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="CMakePresetLoader">{
+  &quot;useNewFormat&quot;: true
+}</component>
+  <component name="CMakeReloadState">
+    <option name="reloaded" value="true" />
+  </component>
+  <component name="CMakeRunConfigurationManager">
+    <generated>
+      <config projectName="week4" targetName="week4" />
+    </generated>
+  </component>
+  <component name="CMakeSettings">
+    <configurations>
+      <configuration PROFILE_NAME="Debug" ENABLED="true" CONFIG_NAME="Debug" />
+    </configurations>
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="f69e0c1f-1efd-4c5b-bda9-4d4e7c889e26" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/../week 3/cmake-build-debug/Testing/Temporary/LastTest.log" beforeDir="false" afterPath="$PROJECT_DIR$/../week 3/cmake-build-debug/Testing/Temporary/LastTest.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../week2/week2_Ex2/cmake-build-debug/.cmake/api/v1/reply/cache-v2-72821905d10ae171ad7d.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../week2/week2_Ex2/cmake-build-debug/.cmake/api/v1/reply/cmakeFiles-v1-57bd167e17a97e249063.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../week2/week2_Ex2/cmake-build-debug/.cmake/api/v1/reply/codemodel-v2-696ae9d748fc34dbf946.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../week2/week2_Ex2/cmake-build-debug/.cmake/api/v1/reply/index-2024-11-06T11-14-26-0301.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../week2/week2_Ex2/cmake-build-debug/.cmake/api/v1/reply/target-week2_Ex2-Debug-c787a6c967fd44fd300f.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../week2/week2_Ex2/cmake-build-debug/.cmake/api/v1/reply/toolchains-v1-73f3fefccff08318ab15.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../week2/week2_Ex2/cmake-build-debug/CMakeCache.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../week2/week2_Ex2/cmake-build-debug/CMakeCache.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../week2/week2_Ex2/cmake-build-debug/CMakeFiles/3.26.4/CMakeCCompiler.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/../week2/week2_Ex2/cmake-build-debug/CMakeFiles/3.26.4/CMakeCCompiler.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../week2/week2_Ex2/cmake-build-debug/CMakeFiles/3.26.4/CMakeCXXCompiler.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/../week2/week2_Ex2/cmake-build-debug/CMakeFiles/3.26.4/CMakeCXXCompiler.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../week2/week2_Ex2/cmake-build-debug/CMakeFiles/CMakeConfigureLog.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/../week2/week2_Ex2/cmake-build-debug/CMakeFiles/CMakeConfigureLog.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../week2/week2_Ex2/cmake-build-debug/CMakeFiles/TargetDirectories.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../week2/week2_Ex2/cmake-build-debug/CMakeFiles/TargetDirectories.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../week2/week2_Ex2/cmake-build-debug/CMakeFiles/clion-Debug-log.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../week2/week2_Ex2/cmake-build-debug/CMakeFiles/clion-Debug-log.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../week2/week2_Ex2/cmake-build-debug/CMakeFiles/clion-environment.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../week2/week2_Ex2/cmake-build-debug/CMakeFiles/clion-environment.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../week2/week2_Ex2/cmake-build-debug/CMakeFiles/rules.ninja" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../week2/week2_Ex2/cmake-build-debug/CMakeFiles/week2_Ex2.dir/Tools.cpp.o" beforeDir="false" afterPath="$PROJECT_DIR$/../week2/week2_Ex2/cmake-build-debug/CMakeFiles/week2_Ex2.dir/Tools.cpp.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../week2/week2_Ex2/cmake-build-debug/CMakeFiles/week2_Ex2.dir/main.cpp.o" beforeDir="false" afterPath="$PROJECT_DIR$/../week2/week2_Ex2/cmake-build-debug/CMakeFiles/week2_Ex2.dir/main.cpp.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../week2/week2_Ex2/cmake-build-debug/Testing/Temporary/LastTest.log" beforeDir="false" afterPath="$PROJECT_DIR$/../week2/week2_Ex2/cmake-build-debug/Testing/Temporary/LastTest.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../week2/week2_Ex2/cmake-build-debug/cmake_install.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/../week2/week2_Ex2/cmake-build-debug/cmake_install.cmake" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../week2/week2_Ex2/cmake-build-debug/week2_Ex2" beforeDir="false" afterPath="$PROJECT_DIR$/../week2/week2_Ex2/cmake-build-debug/week2_Ex2" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.clang-format" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.clangd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/DS.store" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/image.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/image.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/niftiio.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/niftiio.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/week_mt.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/week_mt.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/week_mt.mk" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/week_mt.project" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ClangdSettings">
+    <option name="formatViaClangd" value="false" />
+  </component>
+  <component name="ExecutionTargetManager" SELECTED_TARGET="CMakeBuildProfile:Debug" />
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="CMakeLists.txt" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="ProjectApplicationVersion">
+    <option name="ide" value="CLion" />
+    <option name="majorVersion" value="2023" />
+    <option name="minorVersion" value="2" />
+  </component>
+  <component name="ProjectId" id="2p6tWNdwk4JntWK5AuBJDGWtC1p" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
+    &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.cidr.known.project.marker&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;cf.advertisement.text.has.clang-format&quot;: &quot;true&quot;,
+    &quot;cf.first.check.clang-format&quot;: &quot;false&quot;,
+    &quot;cidr.known.project.marker&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/rr/AMIP/AssignmentGit/week4&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.lookFeel&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  }
+}</component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$" />
+      <recent name="$PROJECT_DIR$/data" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration default="true" type="CLionExternalRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true">
+      <method v="2">
+        <option name="CLION.EXTERNAL.BUILD" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="week4" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="week4" TARGET_NAME="week4" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="week4" RUN_TARGET_NAME="week4">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="f69e0c1f-1efd-4c5b-bda9-4d4e7c889e26" name="Changes" comment="" />
+      <created>1732098383265</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1732098383265</updated>
+      <workItem from="1732098384342" duration="3652000" />
+      <workItem from="1732375071996" duration="1922000" />
+      <workItem from="1732377298410" duration="2545000" />
+      <workItem from="1732489908448" duration="14175000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="VCPKGProject">
+    <isAutomaticEditVcpkgJson value="false" />
+    <isAutomaticCheckingOnLaunch value="false" />
+    <isAutomaticFoundErrors value="true" />
+    <isAutomaticFoundErrors value="true" />
+  </component>
+</project>

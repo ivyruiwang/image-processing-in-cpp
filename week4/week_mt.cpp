@@ -12,7 +12,8 @@ typedef int num;
 int main ( int argc, char *argv[] ) {
 
 	auto
-		uber_parent_path = std::filesystem::path(argv[0]).parent_path().parent_path().parent_path().parent_path(); // with codelite
+//		uber_parent_path = std::filesystem::path(argv[0]).parent_path().parent_path().parent_path().parent_path(); // with codelite
+        uber_parent_path = std::filesystem::current_path().parent_path(); // for my macbook
 		//uber_parent_path = std::filesystem::current_path().parent_path().parent_path(); // with cmake
 	vector <string> allfiles {
 		std::string ( uber_parent_path.string() ) + "/amipractical_data/brainT1.nii.gz" };
@@ -37,25 +38,25 @@ int main ( int argc, char *argv[] ) {
     inputImage.getSlice( 1, 128, std::string ( uber_parent_path.string() ) + "/amipractical_data/test_sliceY.bmp" );
     inputImage.getSlice( 2, 128, std::string ( uber_parent_path.string() ) + "/amipractical_data/test_sliceZ.bmp" );
 
-	bool 
-		doFilter = true;
-		
-	if ( doFilter ) {
+    bool
+            doFilter = false;
 
-		// filter in x(0), y(1) and z(2) direction
-		std::cout << "smoothing image x," << std::flush;
-		inputImage.filter( gk, 0 );
-		std::cout << " y," << std::flush;
-		inputImage.filter( gk, 1 );
-		std::cout << " z ... " << std::flush;
-		inputImage.filter( gk, 2 );
-		std::cout << "done\n";
-		
-	}
+    if ( doFilter ) {
+
+        // filter in x(0), y(1) and z(2) direction
+        std::cout << "smoothing image x," << std::flush;
+        inputImage.filter( gk, 0 );
+        std::cout << " y," << std::flush;
+        inputImage.filter( gk, 1 );
+        std::cout << " z ... " << std::flush;
+        inputImage.filter( gk, 2 );
+        std::cout << "done\n";
+
+    }
 
     // compute maxtree components
     std::cout << "computing Maxtree ... ";
-    inputImage.getMaxtree(	12,			// # levels
+    inputImage.getMaxtree(	8,			// # levels
 							6,			// connectivity ( 3d: 6 or 26, 2d: 4 or 8 )
 							"Berger" );	// algorithm
     std::cout << "done\n";
@@ -63,18 +64,19 @@ int main ( int argc, char *argv[] ) {
 	// we have put the peak component numbers in each voxel, see the hpp-file
 	// now we want to store those in a different .nii
     inputImage.saveNII ( std::regex_replace( allfiles [ i ], std::regex ( ".nii" ), "_components.nii" ) );
-	
+    std::cout << "save components.nii ... done\n";
+
     std::cout << "filling component ... ";
-	inputImage.setpoints ( 	6486, 		// starting component
-							0,			// maximum component label included
+	inputImage.setpoints ( 	0, 		// starting component
+                              10033,			// maximum component label included
 							true,		// sort collected points (for final set)
-							false );	// set pixel values to level ( if false -> binary mask )
+							true );	// set pixel values to level ( if false -> binary mask )
     std::cout << "done\n";
 
     // Print some slices in BMP format
-    inputImage.getSlice( 0,  90, "../../data/testF_sliceX.bmp" );
-    inputImage.getSlice( 1, 128, "../../data/testF_sliceY.bmp" );
-    inputImage.getSlice( 2, 128, "../../data/testF_sliceZ.bmp" );
+    inputImage.getSlice( 0,  90, "../amipractical_data/testF_sliceX.bmp" );
+    inputImage.getSlice( 1, 128, "../amipractical_data/testF_sliceY.bmp" );
+    inputImage.getSlice( 2, 128, "../amipractical_data/testF_sliceZ.bmp" );
 
     // write output
     inputImage.saveNII ( std::regex_replace( allfiles [ i ], std::regex ( ".nii" ), "_output.nii" ) );

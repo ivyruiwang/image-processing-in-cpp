@@ -102,7 +102,7 @@ void getNiftiBricks ( nifti_image *nim, void *nifti_blob, unsigned bufsize, Data
     // blobImport<> ( nifti_blob, bufsize, vec);
     // break;*/
   default:
-    cout << nim->fname << " has unsupported data type " << nim->datatype << endl;
+    cout << nim->fname << " has unsupported amipractical_data type " << nim->datatype << endl;
     break;
   } /* switch ( nim->datatype )                                          */
 
@@ -164,7 +164,7 @@ void setNiftiBricks ( nifti_image *nim, DataVec *vec ) {
     blobExport<> ( nim, vec);
     break;*/
   default:
-    cout << nim->fname << " has unsupported data type " << nim->datatype << endl;
+    cout << nim->fname << " has unsupported amipractical_data type " << nim->datatype << endl;
     break;
   } /* switch ( nim->datatype )                                          */
 
