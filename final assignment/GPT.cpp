@@ -9,7 +9,11 @@ typedef int num;
 
 int main(int argc, char *argv[]) {
     // NOTE: Adjust dataPath to your file location
-    std::string dataPath = "C:/Users/25812/Desktop/C++/final/AMIPractical/AMIPractical/AMIPractical/amipractical_data/final/";
+
+    //    std::string dataPath = "C:/Users/25812/Desktop/C++/final/AMIPractical/AMIPractical/AMIPractical/amipractical_data/final/";
+
+    // In my Macbook
+    std::string dataPath = "/Users/rr/AMIP/AssignmentGit/final assignment/amipractical_data/";
 
     // Load the original 3D image
     aip::imageNd<num> inputImage(dataPath + "Pat1.nii.gz");
@@ -41,9 +45,9 @@ int main(int argc, char *argv[]) {
     auto N_voxels = inputImage.getsize(0) * inputImage.getsize(1) * inputImage.getsize(2);
     std::vector<int> numberVoxelsPerLabel(Maxdata + 1, 0);
 
-    for (auto i = 0; i < inputImage.getsize(0); ++i)
-        for (auto j = 0; j < inputImage.getsize(1); ++j)
-            for (auto k = 0; k < inputImage.getsize(2); ++k)
+    for (size_t i = 0; i < inputImage.getsize(0); ++i)
+        for (size_t j = 0; j < inputImage.getsize(1); ++j)
+            for (size_t k = 0; k < inputImage.getsize(2); ++k)
                 numberVoxelsPerLabel[inputImage({i, j, k})]++;
 
     // Sorting by voxel count
@@ -53,9 +57,9 @@ int main(int argc, char *argv[]) {
     std::sort(numberVoxelsPerLabel_sorted.begin(), numberVoxelsPerLabel_sorted.end(), std::greater<>());
 
     // Overlap Analysis with Presegmentation
-    for (auto i = 0; i < inputImage.getsize(0); ++i) {
-        for (auto j = 0; j < inputImage.getsize(1); ++j) {
-            for (auto k = 0; k < inputImage.getsize(2); ++k) {
+    for (size_t i = 0; i < inputImage.getsize(0); ++i) {
+        for (size_t j = 0; j < inputImage.getsize(1); ++j) {
+            for (size_t k = 0; k < inputImage.getsize(2); ++k) {
                 int watershedLabel = inputImage({i, j, k});
                 int presegLabel = presegmentation({i, j, k});
                 // Remove basins not overlapping significantly with presegmentation

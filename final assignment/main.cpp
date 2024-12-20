@@ -4,152 +4,79 @@
 #include <queue>
 #include "image.hpp"
 
-
 typedef int num;
 
-int main(int argc, char *argv[]) {
-    
-    // NOTE: Adjust dataPath to your file location
-    std::string dataPath = "C:/Users/25812/Desktop/C++/final/AMIPractical/AMIPractical/AMIPractical/amipractical_data/final/";
+aip::imageNd<num>* processImage(const std::string& dataPath, const std::string& filename1, const std::string& filename2,
+                                double sigma, double overlapThreshold) {
 
     // Load the original 3D image
-    aip::imageNd<num> inputImage(dataPath + "Pat1.nii.gz");
-    aip::imageNd<num> presegmentation(dataPath + "Pat1Brain.nii.gz"); // Presegmented brain data
-   
+    std::cout << "Input file: " << filename1 << "\n";
+    auto inputImage = new aip::imageNd<num>(dataPath + filename1);
+    aip::imageNd<num> inputImage_original(dataPath + filename1);
+
+    aip::imageNd<num> presegmentation(dataPath + filename2);
+
+
     // Gaussian Filter Preprocessing
-    double sigma = 1.05;
     auto gk = aip::gausskernel(sigma);
     bool doFilter = true;
 
+    // When sigma = 0, we use anisotropic diffusion.
+    if (sigma < 1e-6){
+        doFilter = false;
+        std::cout << "Anistropic diffusion done\n";
+    }
+
     if (doFilter) {
         std::cout << "Smoothing image x, y, z ... " << std::flush;
-        inputImage.filter(gk, 0); // x-direction
-        inputImage.filter(gk, 1); // y-direction
-        inputImage.filter(gk, 2); // z-direction
-        std::cout << "done\n";
+        inputImage->filter(gk, 0); // x-direction
+        inputImage->filter(gk, 1); // y-direction
+        inputImage->filter(gk, 2); // z-direction
+        std::cout << "Gaussian filter done\n";
     }
 
-    // Print some slices in BMP format
-    inputImage.getSlice( 0,  90, "C:/Users/25812/Desktop/C++/test/Pat1_GS_sliceX_.bmp" );
-    inputImage.getSlice( 1,  90, "C:/Users/25812/Desktop/C++/test/Pat1_GS_sliceY_.bmp" );
-    inputImage.getSlice( 2,  90, "C:/Users/25812/Desktop/C++/test/Pat1_GS_sliceZ_.bmp" );
 
-    auto tmp = 0;
     // Perform Watershed Segmentation
-    bool test = inputImage.GetWatershedImage();
-    std::cout << "Run OK? " << test << std::endl;
+    bool test = inputImage->GetWatershedImage();
+    std::cout << "Watershed segmentation completed: " << test << std::endl;
 
-    // Save initial watershed output for reference
-    inputImage.setNIIdatatype (NIFTI_TYPE_INT32); // set saving data type to int32, so all labels can be printed
-    inputImage.saveNII("C:/Users/25812/Desktop/C++/test/Pat1_Watershed_Initial.nii.gz");
-
-    // Histogram for voxel counts per watershed label
-    auto Maxdata = *std::max_element(inputImage.getdata_ptr()->begin(), inputImage.getdata_ptr()->end());
-    auto N_voxels = inputImage.getsize(0) * inputImage.getsize(1) * inputImage.getsize(2);
-    
-    std::cout<<"Number of voxels: " << N_voxels << std::endl;
-    std::cout<<"Max data: " << Maxdata << std::endl;
-    std::vector<int> numberVoxelsPerLabel(Maxdata+1);
-
-    // set elements to zero
-    for ( auto i=0; i<Maxdata+1; i++ )
-        numberVoxelsPerLabel[i] = 0;
-
-    // make histogram with number of voxel per watershed label
-    for ( size_t i=0; i<inputImage.getsize(0); i++ ){
-		for ( size_t j=0; j<inputImage.getsize(1); j++ ){
-			for ( size_t k=0; k<inputImage.getsize(2); k++ ){
-				tmp =  inputImage( { i, j, k } );
-                //tmp = presegmentation( { i, j, k } );
-                numberVoxelsPerLabel[tmp]++;
-			}
-		}
-	}
-    
-    // Sort the vector
-    sort(numberVoxelsPerLabel.begin(), numberVoxelsPerLabel.end(), greater<>());
-
-    for ( auto i=0; i<20; i++ )
-        std::cout << "element number: " << i << ", items: " << numberVoxelsPerLabel[i] << "\n";
-        
-  // after sorting original index is lost so do it again with a vector pair
-
-  std::vector<pair<int, int>> numberVoxelsPerLabel_new(Maxdata+1);
-  
-   // add elements initialized to zero
-    for ( auto i=0; i<Maxdata+1; i++ ){
-        numberVoxelsPerLabel_new[i].first=0;
-        numberVoxelsPerLabel_new[i].second=0;
-    }
-
-    // make histogram with number of voxel per watershed label
-    for ( size_t i=0; i<inputImage.getsize(0); i++ ){
-		for ( size_t j=0; j<inputImage.getsize(1); j++ ){
-			for ( size_t k=0; k<inputImage.getsize(2); k++ ){
-				tmp =  inputImage( { i, j, k } );
-                //tmp =  presegmentation( { i, j, k } );
-                numberVoxelsPerLabel_new[tmp].first++;
-                numberVoxelsPerLabel_new[tmp].second=tmp;
-			}
-		}
-	}
-
-    std::cout << "\nBefore sorting pair vector\n";
-
-    for ( auto i=0; i<20; i++ )
-        std::cout << "element number: "<< i << ", label : " << numberVoxelsPerLabel_new[i].second << ", items: " << numberVoxelsPerLabel_new[i].first << "\n";
-
-    std::cout << "after sorting\n";
-
-    // Sort the vector
-    sort(numberVoxelsPerLabel_new.begin(), numberVoxelsPerLabel_new.end(), greater<>());
-
-    for ( auto i=0; i<20; i++ )
-        std::cout << "element number: "<< i << ", label : " << numberVoxelsPerLabel_new[i].second << ", items: " << numberVoxelsPerLabel_new[i].first << "\n";
-
-    // Overlap Analysis with Presegmentation
-   
-    
+    // Compute histogram for voxel counts per watershed label
+    auto Maxdata = *std::max_element(inputImage->getdata_ptr()->begin(), inputImage->getdata_ptr()->end());
     std::vector<int> N_basin(Maxdata + 1, 0);   // Total voxels per basin
     std::vector<int> N_overlap(Maxdata + 1, 0); // Overlapping voxels per basin
-    
-    // Count voxels and overlaps and assign dam voxels to nearby basins
-    for (auto i = 0; i < int(inputImage.getsize(0)); i++) {
-        for (auto j = 0; j < int(inputImage.getsize(1)); j++) {
-            for (auto k = 0; k < int(inputImage.getsize(2)); k++) {
-                int watershedLabel = inputImage({i, j, k}); // Current voxel's label
-                int presegLabel = presegmentation({i, j, k}); // Presegmentation label
+
+    // Count voxels and overlaps
+    for (size_t i = 0; i < inputImage->getsize(0); i++) {
+        for (size_t j = 0; j < inputImage->getsize(1); j++) {
+            for (size_t k = 0; k < inputImage->getsize(2); k++) {
+                int watershedLabel = (*inputImage)({i, j, k});
+                int presegLabel = presegmentation({i, j, k});
 
                 if (watershedLabel > 0) {
-                // Regular voxel: Increment counts for the current basin
                     N_basin[watershedLabel]++;
                     if (presegLabel > 0) {
                         N_overlap[watershedLabel]++;
                     }
-                } 
-                else {
-                // pixel basin merging, count the voxel which doesn't belong to a basin
-                // Dam voxel: Assign it to a nearby basin
+                } else {
+                    // Assign dam voxel to a nearby basin
                     for (int di = -1; di <= 1; di++) {
                         for (int dj = -1; dj <= 1; dj++) {
                             for (int dk = -1; dk <= 1; dk++) {
-                                if (di == 0 && dj == 0 && dk == 0) continue; // Skip the voxel itself
+                                if (di == 0 && dj == 0 && dk == 0) continue; // Skip itself
                                 int ni = i + di, nj = j + dj, nk = k + dk;
 
-                            // Check if neighbor is within bounds
-                                if (ni >= 0 && ni < int(inputImage.getsize(0)) &&
-                                    nj >= 0 && nj < int(inputImage.getsize(1)) &&
-                                    nk >= 0 && nk < int(inputImage.getsize(2))) {
-                                    int neighborLabel = inputImage({ni, nj, nk});
+                                if (ni >= 0 && ni < int(inputImage->getsize(0)) &&
+                                    nj >= 0 && nj < int(inputImage->getsize(1)) &&
+                                    nk >= 0 && nk < int(inputImage->getsize(2))) {
+                                    int neighborLabel = (*inputImage)({static_cast<size_t >(ni), static_cast<size_t>(nj), static_cast<size_t>(nk)});
                                     if (neighborLabel > 0) {
-                                    // Assign the dam voxel to the nearby basin
                                         watershedLabel = neighborLabel;
-                                        inputImage({i, j, k}) = watershedLabel; // Update voxel's label
+                                        (*inputImage)({i, j, k}) = watershedLabel;
                                         N_basin[watershedLabel]++;
                                         if (presegLabel > 0) {
                                             N_overlap[watershedLabel]++;
                                         }
-                                        di = dj = dk = 2; // Break all loops
+                                        di = dj = dk = 2; // Exit loop
                                     }
                                 }
                             }
@@ -160,58 +87,82 @@ int main(int argc, char *argv[]) {
         }
     }
 
-    // Print the first 10 elements of N_basin and N_overlap
-    std::cout << "First 10 elements of N_basin:" << std::endl;
-    for (size_t i = 0; i < 10 && i < N_basin.size(); i++) {
-        std::cout << "Label " << i << ": " << N_basin[i] << std::endl;
-    }
-
-    std::cout << "First 10 elements of N_overlap:" << std::endl;
-    for (size_t i = 0; i < 10 && i < N_overlap.size(); i++) {
-        std::cout << "Label " << i << ": " << N_overlap[i] << std::endl;
-    }
-    
     // Filter basins based on overlap ratio
-    double overlapThreshold = 0.5; // Example threshold
     std::vector<bool> keepBasin(Maxdata + 1, false);
-
     for (int label = 1; label <= Maxdata; label++) {
         double overlapRatio = (double)N_overlap[label] / N_basin[label];
         if (overlapRatio >= overlapThreshold) {
-            keepBasin[label] = true; // Keep basin if overlap ratio exceeds threshold
+            keepBasin[label] = true;
         }
     }
-    
-    aip::imageNd<num> inputImage_original ( dataPath + "Pat1.nii.gz" );
+
     // Remove basins that do not meet the threshold
-    for (size_t i = 0; i < inputImage.getsize(0); i++) {
-        for (size_t j = 0; j < inputImage.getsize(1); j++) {
-            for (size_t k = 0; k < inputImage.getsize(2); k++) {
-                int watershedLabel = inputImage({i, j, k});
+    for (size_t i = 0; i < inputImage->getsize(0); i++) {
+        for (size_t j = 0; j < inputImage->getsize(1); j++) {
+            for (size_t k = 0; k < inputImage->getsize(2); k++) {
+                int watershedLabel = (*inputImage)({i, j, k});
                 if (!keepBasin[watershedLabel]) {
-                    inputImage({i, j, k}) = 0; // Remove basin
-                    inputImage_original({i, j, k}) = 0; // Adjust original image
+                    (*inputImage)({i, j, k}) = 0;
+                    inputImage_original({i, j, k}) = 0;
                 }
             }
         }
     }
 
-    // Save refined watershed output
-    inputImage.saveNII("C:/Users/25812/Desktop/C++/test/Pat1_Watershed_Refined.nii.gz");
-    inputImage_original.saveNII("C:/Users/25812/Desktop/C++/test/Pat1_Refined_T1MRI.nii.gz");
+    // Save refined outputs
+    inputImage->saveNII(dataPath + "Watershed_Refined_" + filename1);
+    inputImage_original.saveNII(dataPath + "Refined_T1MRI_" + filename1);
 
-    // Print example slices for visualization
-    inputImage_original.getSlice(0, 90, "C:/Users/25812/Desktop/C++/test/Pat1_Final_SliceX.bmp");
-    inputImage_original.getSlice(1, 90, "C:/Users/25812/Desktop/C++/test/Pat1_Final_SliceY.bmp");
-    inputImage_original.getSlice(2, 90, "C:/Users/25812/Desktop/C++/test/Pat1_Final_SliceZ.bmp");
+    std::cout << "Refined outputs saved.\n\n" << std::endl;
 
-    std::cout << "Segmentation process completed." << std::endl;
-    return 0;
+    return inputImage;
+    // Return pointer to refined image
 }
 
 
 
 
+int main(int argc, char *argv[]) {
 
+    // NOTE: Adjust dataPath to your file location
+    std::string dataPath = "/Users/rr/AMIP/AssignmentGit/final assignment/amipractical_data/";
 
+    //Parameters we need to play with, if you use AD file, set sigma = 0, do not let sigma less than 1e-6
+//    double sigma = 2.05; //  0.55 1.05 2.05
+    double overlapThreshold = 0.7; // 0.3 0.5 0.7
 
+    // filename1: original file; filename2: presegmentation
+//    aip::imageNd<num>* Sub1_gau = processImage(dataPath, "Subj1.nii.gz", "Subj1Brain.nii.gz",sigma, overlapThreshold);
+//    aip::imageNd<num>* Sub1_ad = processImage(dataPath, "Subj1_AD.nii.gz", "Subj1Brain.nii.gz",0, overlapThreshold);
+
+//    aip::imageNd<num>* Sub2_gau = processImage(dataPath, "Subj2.nii.gz", "Subj2Brain.nii.gz",sigma, overlapThreshold);
+//    aip::imageNd<num>* Sub2_ad = processImage(dataPath, "Subj2_AD.nii.gz", "Subj2Brain.nii.gz",0, overlapThreshold);
+
+//    aip::imageNd<num>* Sub3_gau = processImage(dataPath, "Subj3.nii.gz", "Subj3Brain.nii.gz",sigma, overlapThreshold);
+//    aip::imageNd<num>* Sub3_ad = processImage(dataPath, "Subj3_AD.nii.gz", "Subj3Brain.nii.gz",0, overlapThreshold);
+
+//    aip::imageNd<num>* Sub4_gau = processImage(dataPath, "Subj4.nii.gz", "Subj4Brain.nii.gz",sigma, overlapThreshold);
+//    aip::imageNd<num>* Sub4_ad = processImage(dataPath, "Subj4_AD.nii.gz", "Subj4Brain.nii.gz",0, overlapThreshold);
+
+//    aip::imageNd<num>* Pat1_gau = processImage(dataPath, "Pat1.nii.gz", "Pat1Brain.nii.gz",sigma, overlapThreshold);
+    aip::imageNd<num>* Pat1_ad = processImage(dataPath, "Pat1_AD.nii.gz", "Pat1Brain.nii.gz",0, overlapThreshold);
+
+//    aip::imageNd<num>* Pat2_gau = processImage(dataPath, "Pat2.nii.gz", "Pat2Brain.nii.gz",sigma, overlapThreshold);
+    aip::imageNd<num>* Pat2_ad = processImage(dataPath, "Pat2_AD.nii.gz", "Pat2Brain.nii.gz",0, overlapThreshold);
+
+    // Clean up the dynamically allocated image
+//    delete Sub1_gau;
+//    delete Sub1_ad;
+//    delete Sub2_gau;
+//    delete Sub2_ad;
+//    delete Sub3_gau;
+//    delete Sub3_ad;
+//    delete Sub4_gau;
+//    delete Sub4_ad;
+
+//    delete Pat1_gau;
+//    delete Pat2_gau;
+      delete Pat1_ad;
+      delete Pat2_ad;
+    return 0;
+}
